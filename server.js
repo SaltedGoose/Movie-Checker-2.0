@@ -190,10 +190,17 @@ app.post("/random", async (req, res) => {
     }else if(paramLength === 1){
         const searchParam = Object.keys(randomParams)[0];
         if (searchParam === "watch_time"){
+            const watchTime = Number(randomParams[searchParam])
+    
             response = await db.query(`
-                SELECT * FROM movies WHERE ${searchParam} <= $1
-                ORDER BY REGEXP_REPLACE(LOWER(name), '[''? ]', '', 'g') ASC;
-            `, [Number(randomParams[searchParam])]);
+            SELECT * FROM movies WHERE ${searchParam} BETWEEN $1 AND $2
+            ORDER BY REGEXP_REPLACE(LOWER(name), '[''? ]', '', 'g') ASC;
+            `, [watchTime - 50, watchTime]
+            );
+            if(response.rows.length === 0){
+                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+                return
+            }
         }else{
             response = await db.query(`
                 SELECT * FROM movies WHERE LOWER(${searchParam}) LIKE '%' || $1 || '%'
@@ -208,11 +215,15 @@ app.post("/random", async (req, res) => {
             delete randomParams.watch_time;
             const newSearchParams = Object.keys(randomParams);
             response = await db.query(`
-                SELECT * FROM movies WHERE watch_time <= $1
-                AND LOWER(${newSearchParams[0]}) LIKE '%' || $2 || '%'
+                SELECT * FROM movies WHERE watch_time BETWEEN $1 AND $2
+                AND LOWER(${newSearchParams[0]}) LIKE '%' || $3 || '%'
                 ORDER BY REGEXP_REPLACE(LOWER(name), '[''? ]', '', 'g') ASC;
-            `, [Number(time), randomParams[newSearchParams[0]]])
-
+            `, [Number(time) - 50, Number(time), randomParams[newSearchParams[0]]]
+            );
+            if(response.rows.length === 0){
+                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+                return
+            }
         }else{
             response = await db.query(`
                 SELECT * FROM movies WHERE LOWER(${searchParams[0]}) LIKE '%' || $1 || '%'
@@ -223,12 +234,18 @@ app.post("/random", async (req, res) => {
     
     }else if(paramLength === 3){
         const searchParams = Object.keys(randomParams);
+        const time = Number(randomParams[searchParams[1]]);
         response = await db.query(`
             SELECT * FROM movies WHERE LOWER(${searchParams[0]}) LIKE '%' || $1 || '%'
-            AND ${searchParams[1]} <= $2
-            AND LOWER(${searchParams[2]}) LIKE '%' || $3 || '%'
+            AND ${searchParams[1]} BETWEEN $2 AND $3
+            AND LOWER(${searchParams[2]}) LIKE '%' || $4 || '%'
             ORDER BY REGEXP_REPLACE(LOWER(name), '[''? ]', '', 'g') ASC;
-        `, [randomParams[searchParams[0]], Number(randomParams[searchParams[1]]), randomParams[searchParams[2]]])
+        `, [randomParams[searchParams[0]], time - 50, time, randomParams[searchParams[2]]]
+        );
+        if(response.rows.length === 0){
+            res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+            return
+        }
     }
 
     movies = await randomMovies(response);
