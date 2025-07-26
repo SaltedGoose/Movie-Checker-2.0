@@ -1,0 +1,18 @@
+#login-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 100%;
+  color: #0B60B0;
+}
+
+#password-div{
+  display: flex;
+  flex-direction: row;
+}
+
+#reveal-button{
+  border-radius: 50%;
+  border-color: white;
+}

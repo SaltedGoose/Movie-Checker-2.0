@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <%- include('partials/header.ejs') %>
+    <link rel="stylesheet" href="/styles/index.css">
+</head>
+<body>
+    <%- include('partials/navbar.ejs') %>
+    <div id="main-movie-display-div">
+        <% movies.forEach(movie => { %>
+            <div class="movie-div">
+                <h4>Movie Name: <%= movie.name %></h4>
+                <h4>Location: <%= movie.location %></h4>
+                <h4>Letter: <%= movie.letter %></h4>
+                <h4>Number: <%= movie.number %></h4>
+                <h4>Category: <%= movie.category %></h4>
+                <h4>Main Actors_Actresses: <%= movie.main_actors_actresses %></h4>
+                <h4>Watch Time: <%= movie.watch_time %> Mins</h4>
+            </div>
+        <% }) %>
+    </div>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

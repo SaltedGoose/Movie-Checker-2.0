@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+    <%- include('partials/header.ejs') %>
+    <link rel="stylesheet" href="/styles/adding.css">
+</head>
+<body>
+    <%- include('partials/navbar.ejs') %>
+    <div id="main" class="container px-3">
+        <div class="form-div mb-4">
+            <form method="post">
+                <div class="form-div mb-4">
+                    <label class="form-label me-2">Movie Name:</label>
+                    <input type="text" class="form-control mb-2" name="name"/>
+                </div>
+                    <div class="form-div mb-4">
+                    <label class="form-label me-2">Location:</label>
+                <input type="text" class="form-control mb-2" name="location"/>
+                </div>
+                <div class="form-div mb-4">
+                    <label class="form-label me-2">Category:</label>
+                    <input type="text" class="form-control mb-2" name="category"/>
+                </div>
+                <div class="form-div mb-4">
+                    <label class="form-label me-2">Main Actors_Actresses:</label>
+                    <input type="text" class="form-control mb-2" name="main_actors_actresses"/>
+                </div>
+                <div class="form-div mb-4">
+                    <label class="form-label me-2">Watch Time: </label>
+                    <input type="text" class="form-control mb-2" name="watch_time"/>
+                </div>
+                <div id="button-div">
+                    <button id="add" class="btn btn-outline-primary" formaction="/add">Add</button>
+                    <% if(locals.response) {%>
+                        <h5 id="add-response"><%= response %></h5>
+                    <% }else { %>
+                        <h5 id="add-response"></h5>
+                    <% } %>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

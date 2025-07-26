@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <%- include('partials/header.ejs') %>
+    <link rel="stylesheet" href="/styles/logs.css">
+</head>
+<body>
+    <%- include('partials/admin-navbar.ejs') %>
+    <div id="main-log-display-div">
+        <% if(locals.logs) {%>
+            <% logs.forEach(log => { %>
+                <div class="log-div">
+                    <h3><%= log.type %>: <%= log.date %></h3><br>
+                    <h4>Movie Name: <%= log.name %></h4>
+                    <h4>Location: <%= log.location %></h4>
+                    <h4>Letter: <%= log.letter %></h4>
+                    <h4>Number: <%= log.number %></h4>
+                    <h4>Category: <%= log.category %></h4>
+                    <h4>Main Actors_Actresses: <%= log.main_actors_actresses %></h4>
+                    <h4>Watch Time: <%= log.watch_time %> Mins</h4>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

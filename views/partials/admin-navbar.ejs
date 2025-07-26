@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg" id="custom-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand custom-nav-link" href="/">Movie Checker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% pages.forEach(page => { %>
+            <% if(page === currentPage) {%>
+                <li class="nav-item">
+                    <% if(page === "Home") {%>
+                        <a class="nav-link custom-nav-link active" href="/"><%= page %></a>
+                    <% }else{ %>
+                        <a class="nav-link custom-nav-link active" href="/<%= page.toLowerCase() %>"><%= page %></a>
+                    <% } %>
+                </li>
+            <% }else{ %>
+                <li class="nav-item">
+                    <% if(page === "Home") {%>
+                        <a class="nav-link custom-nav-link" href="/"><%= page %></a>
+                    <% }else{ %>
+                        <a class="nav-link custom-nav-link" href="/<%= page.toLowerCase() %>"><%= page %></a>
+                    <% } %>
+                </li>
+            <% } %>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</nav>

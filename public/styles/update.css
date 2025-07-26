@@ -1,0 +1,14 @@
+#main{
+    padding: 10%;
+    color: #0B60B0;
+}
+
+#button-div{
+    display: flex;
+    flex-direction: row;
+}
+
+#update-response{
+    margin-top: 8px;
+    padding: 0px 20px;
+}

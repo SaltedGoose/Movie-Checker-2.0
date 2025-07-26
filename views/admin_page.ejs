@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <%- include('partials/header.ejs') %>
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+    <%- include('partials/admin-navbar.ejs') %>
+    <div id="main" class="container px-3">
+        <div class="form-div mb-4">
+            <form method="post">
+                <div class="form-div mb-4">
+                    <label class="form-label me-2">Movie Name:</label>
+                    <input type="text" class="form-control mb-2" name="name"/>
+                </div>
+                <div id="button-div">
+                    <button class="btn btn-outline-primary" formaction="/admin-search">Search</button>
+                    <button class="btn btn-outline-primary" formaction="/update">Update</button>
+                    <button class="btn btn-outline-danger" formaction="/delete">Delete</button>
+                    <% if(locals.response) {%>
+                        <h5><%= response %></h5>
+                    <% } %>
+                </div>
+            </form>
+        </div>
+        <% if(locals.movieData) {%>
+            <div id="movie-info-div">
+                <h4>Movie Name: <%= movieData.name %></h4>
+                <h4>Location: <%= movieData.location %></h4>
+                <h4>Letter: <%= movieData.letter %></h4>
+                <h4>Number: <%= movieData.number %></h4>
+                <h4>Category: <%= movieData.category %></h4>
+                <h4>Main Actors/Actresses: <%= movieData.main_actors_actresses %></h4>
+                <h4>Watch Time: <%= movieData.watch_time %> Mins</h4>
+            </div>
+        <% }else if(locals.errorResponse) {%>
+            <div id="movie-info-div">
+                <h4>Movie Name: <%= errorResponse %></h4>
+                <h4>Location: </h4>
+                <h4>Letter: </h4>
+                <h4>Number: </h4>
+                <h4>Category: </h4>
+                <h4>Main Actors/Actresses: </h4>
+                <h4>Watch Time: </h4>
+            </div>
+        <% }else{ %>
+            <div id="movie-info-div">
+                <h4>Movie Name: </h4>
+                <h4>Location: </h4>
+                <h4>Letter: </h4>
+                <h4>Number: </h4>
+                <h4>Category: </h4>
+                <h4>Main Actors/Actresses: </h4>
+                <h4>Watch Time: </h4>
+            </div>
+        <% } %>
+    </div>
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>
