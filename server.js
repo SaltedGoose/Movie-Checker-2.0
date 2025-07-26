@@ -198,7 +198,7 @@ app.post("/random", async (req, res) => {
             `, [watchTime - 50, watchTime]
             );
             if(response.rows.length === 0){
-                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films match Query"});
                 return
             }
         }else{
@@ -221,7 +221,7 @@ app.post("/random", async (req, res) => {
             `, [Number(time) - 50, Number(time), randomParams[newSearchParams[0]]]
             );
             if(response.rows.length === 0){
-                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+                res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films match Query"});
                 return
             }
         }else{
@@ -243,7 +243,7 @@ app.post("/random", async (req, res) => {
         `, [randomParams[searchParams[0]], time - 50, time, randomParams[searchParams[2]]]
         );
         if(response.rows.length === 0){
-            res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films found for query"});
+            res.render("index.ejs", {pages:pages, currentPage:"Home", movies:[], errorResponse:"No Films match Query"});
             return
         }
     }
